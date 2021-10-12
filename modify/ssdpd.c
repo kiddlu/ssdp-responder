@@ -49,6 +49,8 @@
 /* Version number of package */
 #define VERSION "1.8"
 
+#define _PIDFILEDIR  "@runstatedir@"
+#define _CACHEDIR    "@localstatedir@/@vardb@"
 
 
 //ssdpd.c
@@ -68,7 +70,7 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.a
  */
-
+#define _GNU_SOURCE
 #include <sys/utsname.h>	/* uname() for !__linux__ */
 #include "ssdpd.h"
 
@@ -530,7 +532,7 @@ static int usage(int code)
 	return code;
 }
 
-int main(int argc, char *argv[])
+int ssdpd_main(int argc, char *argv[])
 {
 	time_t now, rtmo = 0, itmo = 0;
 	int background = 1;
@@ -626,6 +628,12 @@ int main(int argc, char *argv[])
 	return ssdp_exit();
 }
 
+#ifdef CMDTOOL
+int main(int argc, char *argv[])
+{
+    return ssdpd_main(argc, argv);
+}
+#endif
 /**
  * Local Variables:
  *  indent-tabs-mode: t

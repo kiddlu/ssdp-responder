@@ -4,9 +4,7 @@ project (ssdpd)
 add_definitions (
 	-O2
 	-W -Wall -Wextra -Wno-unused -std=c11
-	-D_GNU_SOURCE -D_XOPEN_SOURCE
-	-D_PIDFILEDIR=\"@runstatedir@\" -D_CACHEDIR=\"@localstatedir@/@vardb@\"
-	-D_FORTIFY_SOURCE=2
+	-DCMDTOOL
 )
 
 set(SOURCES
